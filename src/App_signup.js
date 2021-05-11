@@ -1,42 +1,39 @@
 import React, { useState } from 'react';
-import LoginForm from "./LoginForm";
-
-
-
-function App(){
+import LoginForm from "./SignupForm";
+function App_signup(){
     const adminUser = {
-        name: "chltjdwns",
-        password: "1234"
+        email: "chltjdwns@chltjdwns.com",
+        password: "chltjdwns"
     }
 
-    const [user, setUser] = useState({name: "", password:""});
+    const [user, setUser] = useState({name: "", email:""});
     const [error, setError] = useState("");
 
     //에러처리
     const Login = details => {
         console.log(details);
 
-        if(details.name == adminUser.name && details.password == adminUser.password){
+        if(details.email == adminUser.email && details.password == adminUser.password){
             console.log("Logged in");
             setUser({
                 name: details.name,
-                password: details.password
+                email: details.email
             });
         } else {
-            console.log("정보가 올바르지 않습니다.");
-            setError("정보가 올바르지 않습니다.");
+            console.log("Details do not match!");
+            setError("Details do not match!");
         }
 
     }
 
     const Logout = () => {
         console.log("logout");
-        setUser({ name: "", password: "" });
+        setUser({ name: "", email: "" });
     }
 
     return (
         <div className="App">
-            {(user.name != "") ? (
+            {(user.email != "") ? (
                 <div className="welcome">
                     <h2>welcome, <span>{user.name}</span></h2>
                     <button onClick={Logout}>Logout</button>
@@ -48,4 +45,4 @@ function App(){
     );
 }
 
-export default App;
+export default App_signup;
