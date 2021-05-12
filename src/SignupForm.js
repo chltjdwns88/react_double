@@ -4,13 +4,28 @@ import Modal from "./Modal";
 
 function SignupForm({ Login, error }) {
     const [details, setDetails] = useState({name : "", nickname : "", password : "", phonenumber : "", 
-        checkid : false, checknickname : false, checkphonenumber : true ,verifyCode : "", userVerifyCode : "", open : false, message : ""});
+        checkid : false, checknickname : false, checkphonenumber : false ,verifyCode : "", userVerifyCode : "", open : false, message : ""});
     const open = true;
     const submitHandler = e => {
         e.preventDefault();
         var {checkid, checknickname, checkphonenumber} = details;
-        if(checkid == false || checknickname == false || checkphonenumber == false) {console.log("아직 ")}
+        if(checkid == false || checknickname == false || checkphonenumber == false) {
+            if(checkid == false){
+                setDetails({...details, open : true, message : '아이디 중복확인을 해주세요'});
+            }
+            else if(checknickname == false){
+                setDetails({...details, open : true, message : '닉네임을 확인해주세요'});
+            }
+            else if(checkphonenumber == false){
+                setDetails({...details, open : true, message : '핸드폰 인증을 해주세요'});
+            }
+            return;
+        }
         var {name, nickname, password, phonenumber} = details;
+        if(password == "") {
+            setDetails({...details, open : true, message : '비밀 번호를 입력해주세요'});
+            return;
+        }
         var data = {'userId' : name, 'nickName' : nickname, 'userPassword' : password, 'phoneNumber' : phonenumber};
         fetch('http://localhost:5505/signup/', {
             method : 'POST',
@@ -26,10 +41,11 @@ function SignupForm({ Login, error }) {
         .then(json => {
             console.dir(json);
             if(json.hasOwnProperty('error_message')){
-
+                setDetails({...details, open : true, message : json['error_message']});
             }
             else if(json.hasOwnProperty('success_message')){
-                
+                setDetails({...details, open : true, message : json['success_message'], checkid : false, checknickname : false, checkphonenumber : false,
+                name : "", nickname : "", password : "", phonenumber : "", verifyCode : ""});
             }
         })
         .catch(error => console.log('Error : ', error));
@@ -105,11 +121,11 @@ function SignupForm({ Login, error }) {
         })
         .then(res => res.json())
         .then(json => {
-            console.dir(json);
             if(json.hasOwnProperty('error_message')){
                 setDetails({...details, open : true, message : json['error_message']});
             }
             else if(json.hasOwnProperty('verifyCode')){
+                console.log(json['verifyCode']);
                 setDetails({...details, verifyCode : json['verifyCode'], open : true, message : json['success_message']});
             }
         })
@@ -121,7 +137,10 @@ function SignupForm({ Login, error }) {
         var {verifyCode, userVerifyCode} = details;
         if(verifyCode == undefined) {}
         if(verifyCode == userVerifyCode){
-            setDetails({...details, checkphonenumber : true, open : true, message : "success"});
+            setDetails({...details, checkphonenumber : true, open : true, message : "핸드폰 인증이 완료되었습니다."});
+        }
+        else{
+            setDetails({...details, open : true, message : '인증번호가 다릅니다.'});
         }
     }
 
@@ -133,7 +152,8 @@ function SignupForm({ Login, error }) {
     }
 
     return(
-        (details.open == true ? <Modal open = {() => openModal()} close = {() => closeModal()} header={details.message}> </Modal> :
+        (details.open == true ? <Modal open = {() => openModal()} close = {() => closeModal()} header={details.message}> </Modal> : 
+        window.sessionStorage.getItem('islogined') ? <h2>로그아웃을 해주시기 바랍니다</h2> :
         <div id="one" className="form-inner">
             <h2>회원가입</h2>
             {(error != "") ? ( <div className="error">{error}</div> ) : ""}

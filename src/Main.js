@@ -21,7 +21,7 @@ class Main extends Component{
                     <ul className="header">
                         <li><NavLink to="/Home">홈</NavLink></li>
                         <li><NavLink to="/Free">자유게시판</NavLink></li>
-                        <li><NavLink to="/Stuff">해야 할일</NavLink></li>
+                        <li><NavLink to="/Stuff">시험 정보</NavLink></li>
                         <li><NavLink to="/App">로그인</NavLink></li>
                         <li><NavLink to="/App_signup">회원가입</NavLink></li>
                     </ul>
