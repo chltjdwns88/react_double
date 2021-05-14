@@ -73,18 +73,21 @@ function LoginForm({ Login, error }) {
         (details.open == true ? <Modal open = {() => openModal()} close = {() => closeModal()} header={details.message}> </Modal> : 
         window.sessionStorage.getItem('islogined') ? 
         <Redirect to = '/Home'/>  
-        : <div id="one" className="form-inner">
-            <h2>로그인</h2>
-            {(error != "") ? ( <div className="error">{error}</div> ) : ""}
-            <div className="form-group">
-                <label htmlFor="name">ID:</label>
-                <input type="text" name="name" id="name" onChange={e => setDetails({...details, name: e.target.value})} value={details.name}/>
+        :   
+        <div id = "one">
+            <div className="form-inner">
+                <h2>로그인</h2>
+                {(error != "") ? ( <div className="error">{error}</div> ) : ""}
+                <div className="form-group">
+                    <label htmlFor="name">ID:</label>
+                    <input type="text" name="name" id="name" onChange={e => setDetails({...details, name: e.target.value})} value={details.name}/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
+                </div>
+                <button id="specialone" onClick={submitHandler}>로그인</button>
             </div>
-            <div className="form-group">
-                <label htmlFor="password">Password:</label>
-                <input type="password" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
-            </div>
-            <button onClick={submitHandler}>로그인</button>
         </div>
         )
     )

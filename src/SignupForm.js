@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
-// import "../src/login.css";
+import "../src/login.css";
 
 function SignupForm({ Login, error }) {
     const [details, setDetails] = useState({name : "", nickname : "", password : "", phonenumber : "", 
@@ -154,34 +154,36 @@ function SignupForm({ Login, error }) {
     return(
         (details.open == true ? <Modal open = {() => openModal()} close = {() => closeModal()} header={details.message}> </Modal> : 
         window.sessionStorage.getItem('islogined') ? <h2>로그아웃을 해주시기 바랍니다</h2> :
-        <div id="one" className="form-inner">
-            <h2>회원가입</h2>
-            {(error != "") ? ( <div className="error">{error}</div> ) : ""}
-            <div className="form-group">
-                <label htmlFor="name">ID:</label>
-                <input type="text" name="name" id="name" onChange={e => setDetails({...details, name : e.target.value})} value={details.name}/>
-                <button onClick={checkId}>중복확인</button>
-            </div>
-            <div className="form-group">
-                <label htmlFor="password">Password:</label>
-                <input type="password" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
-            </div>
-            <div className="form-group">
-                <label htmlFor="nickname">닉네임:</label>
-                <input type="nickname" name="nickname" id="nickname" onChange={e => setDetails({...details, nickname: e.target.value})} value={details.nickname}/>
-                <button onClick={checkNickname}>중복확인</button>
-            </div>
-            <div className="form-group">
-                <label htmlFor="phone-number">Phone-Number:</label>
-                <input type="phone-number" name="phone-number" id="phone-number" onChange={e => setDetails({...details, phonenumber: e.target.value})} value={details.phonenumber}/>
-                <button onClick={checkPhonenumber}>중복확인</button>
-            </div>
-            <div className="form-group">
-                <label htmlFor="userVerifyCode">인증번호:</label>
-                <input type="userVerifyCode" name="userVerifyCode" id="userVerifyCode" onChange={e => setDetails({...details, userVerifyCode: e.target.value})} value={details.userVerifyCode}/>
-                <button onClick={checkVerifycode}>중복확인</button>
-            </div>
-            <button onClick={submitHandler}>회원가입</button>
+        <div id="one">
+            <div className="form-inner">
+                <h2>회원가입</h2>
+                {(error != "") ? ( <div className="error">{error}</div> ) : ""}
+                <div className="form-group">
+                    <label htmlFor="name">ID:</label>
+                    <input type="text" name="name" id="name" onChange={e => setDetails({...details, name : e.target.value})} value={details.name}/>
+                    <button onClick={checkId}>중복확인</button>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="nickname">닉네임:</label>
+                    <input type="nickname" name="nickname" id="nickname" onChange={e => setDetails({...details, nickname: e.target.value})} value={details.nickname}/>
+                    <button onClick={checkNickname}>중복확인</button>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="phone-number">Phone-Number:</label>
+                    <input type="phone-number" name="phone-number" id="phone-number" onChange={e => setDetails({...details, phonenumber: e.target.value})} value={details.phonenumber}/>
+                    <button onClick={checkPhonenumber}>인증번호 전송</button>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="userVerifyCode">인증번호:</label>
+                    <input type="userVerifyCode" name="userVerifyCode" id="userVerifyCode" onChange={e => setDetails({...details, userVerifyCode: e.target.value})} value={details.userVerifyCode}/>
+                    <button onClick={checkVerifycode}>인증번호 확인</button>
+                </div>
+                <button id="specialone" onClick={submitHandler}>회원가입</button>
+           </div>
         </div>
     )
     )

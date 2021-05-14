@@ -4,6 +4,8 @@ import Menu_item from '../src/Menu_item';
 import exam_code from '../src/exam_code';
 import Board from '../src/Board';
 import Bullet from '../src/Bullet';
+import Comment from '../src/Comment';
+import Write from '../src/Write';
 
 class Free extends Component{
     constructor(props){
@@ -18,6 +20,7 @@ class Free extends Component{
             open : false,
             message : "",
             examId : "",
+            write : false,
         }
     }
 
@@ -66,6 +69,14 @@ class Free extends Component{
         .catch(error => console.log('Error : ', error));
     }
 
+    writeCheck(){
+        if(!window.sessionStorage.getItem('islogined')) {
+            console.log('로그인을 해주세요')
+            return;
+        }
+        this.setState({...this.state, writeCheck : true});
+    }
+
     render(){
         var key = Object.keys(exam_code);
         var check = this.state.check;
@@ -77,10 +88,18 @@ class Free extends Component{
             {item.date}/></li></div>
         });
         const bullet_content = this.state.results.map((item, index) => {
-            return <li><Bullet title = {item.title} content = {item.content} nickName = {item.nickName} date = {item.date}></Bullet></li>
-        })
+            return <div>
+                    <li><Bullet examId = {this.state.examId} title = {item.title} content = {item.content} nickName = {item.nickName} date = {item.date}></Bullet></li>
+                </div>
+        });
+
         return(
-            (!this.state.check ? <ol>{elements}</ol> : this.state.bulletcheck ?  <ol>{bullet_content}</ol> : <ol>{exam_content}</ol>) 
+            (this.state.writeCheck ? <Write examId = {this.state.examId}></Write> : !this.state.check 
+                ? <div><ol>{elements}</ol></div>
+                : this.state.bulletcheck ?  
+                <ol>{bullet_content}</ol> 
+                : <ol>{exam_content}<button onClick = {() => this.writeCheck()}>글작성</button></ol>
+            ) 
         );
     }
 }
