@@ -18,6 +18,9 @@ header{
 
 h1, h2, p, ul, li{
     font-family: sans-serif;
+    padding:0px;
+    margin:0px;
+
 }
 
 ul.header li{

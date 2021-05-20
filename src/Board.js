@@ -1,4 +1,6 @@
 import React, { component } from "react";
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
 
 class Board extends React.Component{
     constructor(props){
@@ -7,12 +9,12 @@ class Board extends React.Component{
 
     render(){
         return(
-            <div>
-                <h2>{this.props.title}</h2>
-                <h2>{this.props.nickName}</h2>
-                <h2>{this.props.date}</h2>
-            </div>
-        );
+                <TableRow>
+                    <TableCell>{this.props.title}</TableCell>
+                    <TableCell>{this.props.nickName}</TableCell>
+                    <TableCell>{this.props.date}</TableCell>
+                </TableRow>
+        )
     }
 }
 

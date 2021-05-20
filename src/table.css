@@ -1,0 +1,35 @@
+td {
+    width: 200px;
+    margin-top:10px;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+th {
+    width:200px;
+    padding-top: 10px;
+    text-align: center;
+    background-color: darksalmon;
+}
+
+table {
+    border: "1";
+    margin-bottom: 20px;
+}
+
+/* button {
+    /* appearance: none; */
+    /* background: none; */
+    /* border : none; */
+    /* outline: none; */
+    /* display:inline-block; */
+    /* padding: 10px 15px; */
+    /* border-radius: 8px; */
+    /* background-image: linear-gradient(to right, #FFCE00 50%, #FFCE00 50%, #FE4880); */
+    /* background-size: 200%; */
+    /* background-position: 0%; */
+    /* transition: 0.4s; */
+    /* color: #FFF; */
+    /* font-weight: 700; */
+    /* cursor: pointer; */
+/* } */

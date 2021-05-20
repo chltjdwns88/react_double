@@ -9,6 +9,8 @@ import Free from "../src/Free";
 import Stuff from "./Stuff";
 import App from "./App";
 import App_signup from "./App_signup";
+import Hero from "./Hero";
+
 
 class Main extends Component{
     render(){
@@ -24,6 +26,7 @@ class Main extends Component{
                         <li><NavLink to="/Stuff">시험 정보</NavLink></li>
                         <li><NavLink to="/App">로그인</NavLink></li>
                         <li><NavLink to="/App_signup">회원가입</NavLink></li>
+                        <li><NavLink to="/Hero">만든이</NavLink></li>
                     </ul>
                     <div className="content">
                         <Route path="/Home" component={Home}/>
@@ -31,6 +34,7 @@ class Main extends Component{
                         <Route path="/Stuff" component={Stuff}/>
                         <Route path="/App" component={App}/>
                         <Route path="/App_signup" component={App_signup}/>
+                        <Route path="/Hero" component={Hero}/>
                     </div>
                 </div>
             </HashRouter>

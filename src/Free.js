@@ -6,6 +6,15 @@ import Board from '../src/Board';
 import Bullet from '../src/Bullet';
 import Comment from '../src/Comment';
 import Write from '../src/Write';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import TableBody from '@material-ui/core/TableBody';
+import TableHead from '@material-ui/core/TableHead';
+import "../src/table.css"
+//요올 많이 했는데.
+
 
 class Free extends Component{
     constructor(props){
@@ -81,27 +90,54 @@ class Free extends Component{
         var key = Object.keys(exam_code);
         var check = this.state.check;
         const elements = this.state.key.map((item, index) => {
-            return <div value ={item} onClick = {() => this.buttonCheck(item)}><li key = {index}><Menu_item title = {item}></Menu_item></li></div>
+            return (
+                <Paper value ={item} onClick = {() => this.buttonCheck(item)}>
+                    <Table>
+                        <TableHead>
+                            <TableCell>게시판</TableCell>
+                        </TableHead>
+                        <TableBody>                  
+                            <Menu_item title = {item}></Menu_item>
+                        </TableBody>
+                    </Table>
+                </Paper>
+            );
         });
         const exam_content = this.state.results.map((item, index) => {
-            return <div value = {item} onClick = {() => this.buttonBullet(item.title, item.nickName)}><li key = {index}><Board examId = {this.state.examId} title = {item.title} nickName = {item.nickName} date = 
-            {item.date}/></li></div>
+            return (
+                <Paper value = {item} onClick = {() => this.buttonBullet(item.title, item.nickName)}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>제목</TableCell>
+                                <TableCell>닉네임</TableCell>
+                                <TableCell>날짜</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <Board examId = {this.state.examId} title = {item.title} nickName = {item.nickName} date = {item.date}/>
+                        </TableBody>
+                    </Table>
+                </Paper>
+            );
         });
         const bullet_content = this.state.results.map((item, index) => {
             return <div>
-                    <li><Bullet examId = {this.state.examId} title = {item.title} content = {item.content} nickName = {item.nickName} date = {item.date}></Bullet></li>
-                </div>
+                        <oi><Bullet examId = {this.state.examId} title = {item.title} content = {item.content} nickName = {item.nickName} date = {item.date}></Bullet></oi>
+                   </div>
         });
-
+        
         return(
             (this.state.writeCheck ? <Write examId = {this.state.examId}></Write> : !this.state.check 
                 ? <div><ol>{elements}</ol></div>
                 : this.state.bulletcheck ?  
                 <ol>{bullet_content}</ol> 
-                : <ol>{exam_content}<button onClick = {() => this.writeCheck()}>글작성</button></ol>
-            ) 
+                : <ol>{exam_content}<button id="specialone" onClick = {() => this.writeCheck()}>글작성</button></ol>
+            )
         );
     }
 }
 
 export default Free;
+
+{/* <p key={index}></p> */}

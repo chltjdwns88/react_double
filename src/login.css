@@ -96,6 +96,27 @@ input, button {
     cursor: pointer;
 }
 
+#specialone:hover{
+    background-position: 100% 0%;
+}
+
+#specialtwo{
+    display:inline-block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #FFCE00 50%, #FFCE00 50%, #FE4880);
+    background-size: 200%;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #FFF;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#specialtwo:hover{
+    background-position: 100% 0%;
+}
+
 #one .form-inner button:hover,
 .welcome button:hover{
     background-position: 100% 0%;
