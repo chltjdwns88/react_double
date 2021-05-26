@@ -30,6 +30,7 @@ class Free extends Component{
             message : "",
             examId : "",
             write : false,
+            searchWord : "",
         }
     }
 
@@ -86,6 +87,42 @@ class Free extends Component{
         this.setState({...this.state, writeCheck : true});
     }
 
+    reducePage(){
+        if(this.state.page - 1 < 1) return;
+        this.setState({...this.state, page : this.state.page - 1});
+        this.buttonCheck(examId);
+    }
+
+    increasePage(){
+        this.setState({...this.state, page : this.state.page + 1});
+        this.buttonCheck(examId);
+    }
+
+    searchWord(){
+        var body = {examId : this.state.examId, searchWord : this.state.searchWord};
+        fetch('http://localhost:5505/examboard/searchword/', {
+            method : 'POST',
+            mode : 'cors',
+            cache : 'no-cache',
+            credentials : 'same-origin',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body : JSON.stringify(body);
+        })
+        .then(res => res.json())
+        .then(json => {
+            if(json.hasOwnProperty('error_message')){
+                this.setState({...this.state, open : true, message : json['error_message']});
+            }
+            //여기서 결과에 변화를 준다.
+            else if(json.hasOwnProperty('success_message')){
+                this.setState({...this.state, results : json['success_message']});          
+            }
+        })
+        .catch(error => console.log('Error : ', error));
+    }
+
     render(){
         var key = Object.keys(exam_code);
         var check = this.state.check;
@@ -132,7 +169,13 @@ class Free extends Component{
                 ? <div><ol>{elements}</ol></div>
                 : this.state.bulletcheck ?  
                 <ol>{bullet_content}</ol> 
-                : <ol>{exam_content}<button id="specialone" onClick = {() => this.writeCheck()}>글작성</button></ol>
+                : <ol>{exam_content}
+                    <button id="specialone" onClick = {() => this.reducePage()}>이전</button>
+                    <input id="specialone" onChange = {e => this.setState({...this.state, searchWord : e.target.value})} value = {this.state.searchWord}></input>
+                    <button id="specailone" onClick = {() => this.searchWord()}>검색</button>
+                    <button id="specialone" onClick = {() => this.increasePage()}>이전</button>
+                    <button id="specialone" onClick = {() => this.writeCheck()}>글작성</button>
+                    </ol>
             )
         );
     }
