@@ -94,20 +94,31 @@ class Revise extends React.Component{
 
     
     render(){
+        var contentStlye = {
+            textAlign: "center",
+        }
+        var bulletStyle = {
+            marginTop: 10,
+            marginLeft : 100,
+            marginRight : 100,
+            height:500,
+            padding:20,
+            backgroundColor: "rosybrown",
+        }
         return(
             (this.state.open ? <Modal open = {() => this.openModal()} close = {() => this.closeModal()} header = {this.state.message}></Modal> :
             this.state.redirect ? <Redirect to = "/Home"></Redirect> :
-            <div>
+            <div style={contentStlye}>
+                <h2>글수정</h2>
                 <div className="form-group">
-                    <label htmlFor="titles">Title:</label>
+                    <label htmlFor="titles">제목 : </label>
                     <input type="text" name="titles" onChange = {e => this.setState({...this.state, title : e.target.value})} value = {this.state.title}/>
-                    <button onClick={() => this.checkTitle()}>중복확인</button>
+                    <button id="specialthree" onClick={() => this.checkTitle()}>중복확인</button>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="content">Content:</label>
-                    <input type="textarea" name="content" onChange = {e => this.setState({...this.state, content : e.target.value})} value = {this.state.content}/>
+                    <textarea style={bulletStyle} cols="100" rows="50" type="text" name="content" onChange = {e => this.setState({...this.state, content : e.target.value})} value = {this.state.content}/>
                 </div>
-                <button onClick = {() => this.rewriteComplete()}>수정 완료</button>
+                <button id="specialone" onClick = {() => this.rewriteComplete()}>수정 완료</button>
             </div>
             )
         );
@@ -115,14 +126,3 @@ class Revise extends React.Component{
 }
 
 export default Revise;
-
-// examId = {this.state.examId}
-// title = {this.state.title}
-// content = {this.state.content}
-// nickName = {this.state.Nickname}>
-
-{/* <div className="form-group">
-<label htmlFor="title">title:</label>
-<input type="textarea" name="title"  onChange = {e => this.setState({...this.state, title : e.target.title})} value = {this.state.title}/>
-<button onClick={() => this.checkTitle()}>중복확인</button>
-</div> */}

@@ -25,11 +25,36 @@ input, button {
 
 #one .form-inner{
     position: relative;
-    display:block;
+    display: block;
     background-color: #FFF;
     padding:30px;
     z-index:2;
 }
+
+#toeic{
+    margin-left: 15px;
+    border:1px solid black;
+    text-align: center;
+    background-color: lightgray;
+}
+
+
+#toefl{
+    margin-left:15px;
+    border:1px solid black;
+    text-align: center;
+    background-color: lightgray;
+}
+
+
+
+#teps{
+    margin-left:15px;
+    border:1px solid black;
+    text-align: center;
+    background-color: lightgray;
+}
+
 
 #one .form-inner h2{
     color: #888;
@@ -96,6 +121,63 @@ input, button {
     cursor: pointer;
 }
 
+#specialsix {
+    display:inline-block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #74b9ff 50%, #74b9ff 50%, blue);
+    background-size: 200%;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #FFF;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#specialseven {
+    display:inline-block;
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #74b9ff 50%, #74b9ff 50%, blue);
+    background-size: 200%;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #FFF;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#specialseven:hover{
+    background-position: 100% 0%;
+}
+
+
+#specialsix:hover{
+    background-position: 100% 0%;
+}
+
+#specialthree {
+    display:inline-block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #74b9ff 50%, #74b9ff 50%, blue);
+    background-size: 200%;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #FFF;
+    font-weight: 700;
+    cursor: pointer;
+    width: 55pt;
+    height: 25pt;
+    font-size: 5pt;
+}
+#specialthree:hover{
+    background-position: 100% 0%;
+}
+
 #specialone:hover{
     background-position: 100% 0%;
 }
@@ -115,6 +197,33 @@ input, button {
 
 #specialtwo:hover{
     background-position: 100% 0%;
+}
+
+#specialfour{
+    display:inline-block;
+    margin-top: 5px;
+    margin-right: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, #FFCE00 50%, #FFCE00 50%, #FE4880);
+    background-size: 200%;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #FFF;
+    font-weight: 700;
+    cursor: pointer;
+    height: 25pt;
+}
+
+#specialfour:hover{
+    background-position: 100% 0%;
+}
+
+#searchone{
+    background-color: skyblue;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
 }
 
 #one .form-inner button:hover,

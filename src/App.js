@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 
 
 
-function App(){
+function App(props){
     const adminUser = {
         name: "chltjdwns",
         password: "1234"
@@ -42,7 +42,7 @@ function App(){
                     <button onClick={Logout}>Logout</button>
                 </div>
             ) : (
-                <LoginForm Login={Login} error={error}/>
+                <LoginForm Login={Login} error={error} login = {() => props.login()}/>
             )}
         </div>
     );

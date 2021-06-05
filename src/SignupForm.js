@@ -137,7 +137,7 @@ function SignupForm({ Login, error }) {
         var {verifyCode, userVerifyCode} = details;
         if(verifyCode == undefined) {}
         if(verifyCode == userVerifyCode){
-            setDetails({...details, checkphonenumber : true, open : true, message : "핸드폰 인증이 완료되었습니다."});
+            setDetails({...details, checkphonenumber : true, open : true, message : "핸드폰 인증이 완료되었습니다.", verifyCode : "", userVerifyCode : ""});
         }
         else{
             setDetails({...details, open : true, message : '인증번호가 다릅니다.'});
@@ -174,7 +174,7 @@ function SignupForm({ Login, error }) {
                 </div>
                 <div className="form-group">
                     <label htmlFor="phone-number">Phone-Number:</label>
-                    <input type="phone-number" name="phone-number" id="phone-number" onChange={e => setDetails({...details, phonenumber: e.target.value})} value={details.phonenumber}/>
+                    <input type="phone-number" name="phone-number" id="phone-number" onChange={e => setDetails({...details, phonenumber: e.target.value, checkphonenumber : false})} value={details.phonenumber}/>
                     <button onClick={checkPhonenumber}>인증번호 전송</button>
                 </div>
                 <div className="form-group">

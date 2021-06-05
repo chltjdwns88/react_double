@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Home from "../src/Home";
 
-function LoginForm({ Login, error }) {
+function LoginForm({login, error}) {
     const [details, setDetails] = useState({name: "", password: "", checkid: false, checkpassword: false,
         open : false, message : ""});
     
@@ -48,6 +48,7 @@ function LoginForm({ Login, error }) {
                 setDetails({...details, open : true, message : json['success_message'], name : "", password : ""});
                 window.sessionStorage.setItem('islogined', true);
                 window.sessionStorage.setItem('nickName', json['nickName']);
+                login();
             }
         })
         .catch(error => console.log('Error : ', error));

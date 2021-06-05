@@ -19,6 +19,7 @@ class Write extends Component{
             img : [],
             uploadedImg : false,
             disabled : true,
+            count : 0,
         })
     }
 
@@ -96,20 +97,22 @@ class Write extends Component{
         formData.append('nickName', this.state.nickName);
         //node로 주소를 던질때는, http://는 붙이지 않는다.
         const res = await axios.post("http://localhost:5505/examboard/uploadimg/", formData, config);
-        if(res['data'].hasOwnProperty('error_message')){
+        if(res['data']['error_message']){
             console.dir(res['error_message']);
-            this.setState({...this.state, open : true, message : "upload fail : " + res['data']['error_message']});
+            this.state.count++;
+            this.setState({...this.state, open : true, message : "upload fail : " + '이미지 업로드 실패'});
+            this.setState({...this.state, img : []});
         }
-        else if(res['data'].hasOwnProperty('success_message')){
+        else if(res['data']['success_message']){
+            this.state.count++;
             this.setState({...this.state, uploadedImg : true});
-            console.dir(res['data']['success_message']);
+            this.setState({...this.state, img : []});
+            //console.dir(res);
+            //console.dir(res['success_message']);
         }
-        else{
-            console.dir(res);
-            console.log("herre");
-            this.setState({...this.state, open : true, message : res});
-        }
+        console.log(this.state.count);
     }
+
     openModal = () => {
         this.setState({...this.state, open : true});
     }
@@ -118,26 +121,38 @@ class Write extends Component{
     }
 
     render(){
+        var contentStlye = {
+            textAlign: "center",
+        }
+        var bulletStyle = {
+            marginTop: 10,
+            marginLeft : 100,
+            marginRight : 100,
+            height:500,
+            padding:20,
+            backgroundColor: "rosybrown",
+        }
         const upload = (this.state.img.length >= 1 && this.state.uploadedImg ? <div><h2>이미지가 업로드 되어 있습니다.</h2></div> :
          <div><input disabled = {this.state.disabled} multiple = 'multiple' type = 'file' name = 'file[]' onChange={(e) => this.uploading(e)}></input>
-        <button disabled = {this.state.disabled} onClick = {() => this.uploadImg()}>이미지 업로드</button></div>)
+        <button id="specialfour" disabled = {this.state.disabled} onClick = {() => this.uploadImg()}>이미지 업로드</button></div>)
         return(
             this.state.open ? <Modal open = {() => this.openModal()} close = {() => this.closeModal()} header = {this.state.message}></Modal> : this.state.writeComplete ?
             <Redirect to = "/Home"></Redirect> :
             <div>
-            <div>
+            <div style={contentStlye}>
                 <h2>글쓰기</h2>
                 <div className="form-group">
                     <label htmlFor="title">제목 : </label>
                     <input type="text" name="title" id="title" onChange={e => this.setState({...this.state, title : e.target.value})} value={this.state.title}/>
-                    <button onClick={() => this.checkTitle()}>중복확인</button>
+                    <button id="specialthree" onClick={() => this.checkTitle()}>중복확인</button>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="content">내용 : </label>
-                    <input type="textarea" name="content" id="content" onChange={e => this.setState({...this.state, content: e.target.value})} value={this.state.content}/>
+                <div>
+                    {upload}
+                </div>                
+                <textarea style={bulletStyle} cols="100" rows="50" type="text" name="content" id="content" onChange={e => this.setState({...this.state, content: e.target.value})} value={this.state.content}/>
+                <div>
+                <button id="specialone" onClick={() => this.completeWrite()}>글 작성 완료</button>
                 </div>
-                {upload}
-                <button onClick={() => this.completeWrite()}>글 작성 완료</button>
            </div>
         </div>
         )
